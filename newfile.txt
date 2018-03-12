@@ -1,4 +1,5 @@
 new line
+new line
 new commit1
 h
 hello
