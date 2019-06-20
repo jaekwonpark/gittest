@@ -1,0 +1,60 @@
+
+paths:
+  /namespaces:
+    get:
+      tags:
+      - "ApiEndpoint(Namespace)"
+      description: "Returns a list of all namespaces in the API platform"
+      operationId: "getAllNamespaces"
+      responses:
+        200:
+          description: "Successfully returns all the namespaces1"
+          content:
+            application/json:
+              schema:
+                $ref: "ApiResponse({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                   {/namespaces/common/unversioned/modules/api.info/alpha/models/Namespace}, true)"
+
+  /namespaces/{id}:
+    get:
+      tags:
+      - "ApiEndpoint(Namespace)"
+      description: "Returns details for a single namespace identified by {id}"
+      operationId: "getNamespaceById"
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: "The uuid of the namespaces"
+      responses:
+        200:
+          description: "Returned if details were able to be returned succesfully"
+          content:
+            application/json:
+              schema:
+                $ref: "ApiResponse({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                   {/namespaces/common/unversioned/modules/api.info/alpha/models/Namespace}, false)"
+
+  /namespaces/{id}:
+    delete:
+      tags:
+      - "ApiEndpoint(Namespace)"
+      description: "Delete a single namespace identified by {id}"
+      operationId: "getNamespaceById"
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: "The uuid of the namespaces"
+      responses:
+        200:
+          description: "Returned if deleted successfully"
+          content:
+            application/json:
+              schema:
+                $ref: "ApiResponse({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                   {/namespaces/common/unversioned/modules/api.info/alpha/models/Namespace}, false)"

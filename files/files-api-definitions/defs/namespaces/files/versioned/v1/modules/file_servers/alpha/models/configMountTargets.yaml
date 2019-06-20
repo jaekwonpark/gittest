@@ -1,0 +1,368 @@
+components:
+  schemas:
+     MountTarget:
+        allOf:
+        - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/ExternalizableAbstractModel})"
+        - type: "object"
+          properties:
+            config:
+              type: "object"
+              $ref: "ModelRef({./MountTargetConfig})"
+
+     MountTargetConfig:
+       title: "Mount Target Config."
+       description: "Mount Target config."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           fileServer:
+             type: "object"
+             $ref: "ModelRef({/namespaces/files/versioned/v1/modules/file_servers/alpha/models/FileServer})"
+           version:
+             type: "string"
+             description: "Version of the Mount Target."
+           enableAccessBasedEnumeration:
+             type: "boolean"
+             description: "Flag to enable Access Based Enumeration."
+           maxSizeGib:
+             type: "integer"
+             format: "int64"
+             description: "Maximum size of Mount Target in GiB."
+           mountTargetType:
+             type: "object"
+             $ref: "ModelRef({./MountTargetType})"
+           nestedPath:
+             type: "string"
+             description: "Path of the Nested Mount Target."
+           protocol:
+             type: "object"
+             $ref: "ModelRef({./Protocol})"
+           quotaConfigList:
+             type: "array"
+             items:
+               type: "object"
+               $ref: "ModelRef({./QuotaConfig})"
+           virusScanPolicyConfigList:
+             type: "array"
+             items:
+               type: "object"
+               $ref:  "ModelRef({./VirusScanPolicyConfig})"
+           snapshotConfigList:
+             type: "array"
+             items:
+               type: "object"
+               $ref: "ModelRef({./SnapshotConfig})"
+
+     Protocol:
+       title: "Protocol of Mount Target."
+       description: "Protocol of Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+       properties:
+         protocolTypeList:
+           type: "array"
+           items:
+             type: "object"
+             $ref: "ModelRef({./ProtocolType})"
+         protocolConfig:
+           type: "object"
+           $ref: "ModelRef({./ProtocolConfig})"
+
+     SnapshotConfig:
+       title: "Snapshot Config"
+       description: "Snapshot Config"
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/ExternalizableAbstractModel})"
+       - type: "object"
+         properties:
+           fileServer:
+             type: "object"
+             $ref: "ModelRef({/namespaces/files/versioned/v1/modules/file_servers/alpha/models/FileServer})"
+           id:
+             type: "string"
+             description: "snapshot id"
+           createTime:
+             type: "integer"
+             description: "Snapshot create time."
+           totalSpaceBytes:
+             type: "integer"
+             decsription: "Total Space in Bytes."
+           reclaimableSpaceBytes:
+             type: "integer"
+             description: "Reclaimable space in Bytes."
+           snapshotCreator:
+             type: "object"
+             $ref: "ModelRef({./SnapshotCreator})"
+
+     QuotaConfig:
+       title: "Protocol of Mount Target."
+       description: "Protocol of Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/ExternalizableAbstractModel})"
+       - type: "object"
+         properties:
+           sizeGib:
+             type: "integer"
+             description: "Maximum size of quota."
+           userOrGroupAccount:
+             type: "object"
+             $ref: "ModelRef({./UserOrGroupAccount})"
+           enforcementType:
+             type: "object"
+             $ref: "ModelRef({./EnforcementType})"
+           enableNotification:
+             type: "boolean"
+             description: "Enable notification for user or group."
+           recipientList:
+             type: "array"
+             description: "Email recipient list to user or group."
+             items:
+               type: "string"
+               description: "Recipient list."
+
+     VirusScanPolicyConfig:
+       title: "Mount Target Protocol Config."
+       description: "Mount Target Protocol Config."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/ExternalizableAbstractModel})"
+       - type: "object"
+         properties:
+           scanTimeoutIntervalInSecs:
+             type: "integer"
+             description: "Scan timeout interval."
+           fileServer:
+             - $ref: "ModelRef({/namespaces/files/versioned/v1/modules/file_servers/alpha/models/FileServer})"
+           enableScanOnWrite:
+             type: "boolean"
+             description: "Enable scan on write."
+           enableScanOnRead:
+             type: "boolean"
+             description: "Enable scan on read."
+           fileSizeExclusion:
+             type: "integer"
+             description: "File size exclusion."
+           enableBlockAccessFile:
+             type: "boolean"
+             description: "Enable block access file"
+           enableAntivirus:
+             type: "boolean"
+             description: "Enable anti virus."
+           fileTypeExclusionList:
+             type: "array"
+             items:
+               type: "string"
+               description: "File type exclusion."
+
+     ProtocolConfig:
+       title: "Mount Target Protocol Config."
+       description: "Mount Target Protocol Config."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           smbProtocolConfig:
+             type: "object"
+             $ref: "ModelRef({./SmbProtocolConfig})"
+           nfsProtocolConfig:
+             type: "object"
+             $ref: "ModelRef({./NfsProtocolConfig})"
+           nonNativeProtocolConfig:
+             type: "object"
+             $ref: "ModelRef({./NonNativeProtocolConfig})"
+
+     SmbProtocolConfig:
+       title: "SMB protocol config."
+       description: "SMB Properties of Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           enablePreviousVersion:
+             type: "boolean"
+             description: "Flag to enable windows previous version."
+
+     NonNativeProtocolConfig:
+       title: "Non native protocol config."
+       description: "Non native protocol config of Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           enableConcurrentReads:
+             type: "boolean"
+             description: "Flag to enable concurrent reads."
+           enableCasesensitiveNamespace:
+             type: "boolean"
+             description: "Flag to enable case sensitive name space."
+           enableSymlinkCreation:
+             type: "boolean"
+             description: "Flag to enable symlink creation."
+           enableSimulteneousAccess:
+             type: "boolean"
+             description: "Flag to enable simulteneous access."
+
+     NfsProtocolConfig:
+       title: "NFS protocol config."
+       description: "NFS Properties of mount target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           authenticationType:
+             type: "object"
+             $ref: "ModelRef({./AuthenticationType})"
+           clientAccessType:
+             type: "object"
+             $ref: "ModelRef({./ClientAccessType})"
+           squashType:
+             type: "object"
+             $ref: "ModelRef({./SquashType})"
+           anonymousIdentifier:
+             type: "object"
+             $ref: "ModelRef({./AnonymousIdentifier})"
+
+     ClientAccessType:
+       title: "Access type of the Mount Target."
+       description: "Access type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           defaultAccessType:
+             $ref: "ModelRef({./AccessType})"
+           clientExceptionList:
+             type: "array"
+             items:
+               $ref: "ModelRef({./ClientException})"
+
+     ClientException:
+       title: "Client Exception Reference"
+       description: "Access exception client list of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           readOnlyAccessList:
+             type: "string"
+             description: "Readonly client access list."
+           readWriteAccessList:
+             type: "string"
+             description: "Readwrite client access list."
+           noAccessList:
+             type: "string"
+             description: "Noaccess client list."
+
+     AnonymousIdentifier:
+       title: "Anonymous Identifier Reference"
+       description: "Anonymous Identifier of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           uid:
+             type: "string"
+             description: "User Identifier."
+           gid:
+             type: "string"
+             description: "Group Identifier."
+
+     ProtocolType:
+       title: "Protocol type of the Mount Target"
+       description: "Protocol type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "SMB"
+           - "NFS"
+           - "BOTH"
+
+     MountTargetType:
+       title: "Supported Mount Target Types."
+       description: "Mount Target type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "HOMES"
+           - "GENERAL"
+           - "VIRTUAL"
+
+     AuthenticationType:
+       title: "Authentication type of the Mount Target"
+       description: "Authentication type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "LOCAL"
+           - "DIRECTORY_SERVICE"
+
+     AccessType:
+       title: "Access Type of Mount Target"
+       description: "Access type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "READ_WRITE"
+           - "READ_ONLY"
+           - "NO_ACCESS"
+
+     SquashType:
+       title: "Squash Type of the Mount Target"
+       description: "Squash type of the Mount Target."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "ROOT_SQUASH"
+           - "ALL_SQUASH"
+           - "NONE"
+
+     EnforcementType:
+       title: "Enforcement Type"
+       description: "Enforcement Type."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "HARD"
+           - "SOFT"
+
+     AccountType:
+       title: "Account Type"
+       description: "Account Type."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "USER"
+           - "GROUP"
+           - "UNKNOWN"
+
+     SnapshotCreator:
+       title: "Snapshot Creator"
+       description: "Snapshot Creator."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/BaseEnum})"
+       - type: "string"
+         enum:
+           - "SSR_SNAPSHOT"
+           - "BACKUP_SNAPSHOT"
+
+     UserOrGroupAccount:
+       title: "User or Group Account"
+       description: "User or Group Account."
+       allOf:
+       - $ref: "ModelRef({/namespaces/common/unversioned/modules/data.types/alpha/models/AbstractModel})"
+       - type: "object"
+         properties:
+           accountType:
+             type: "object"
+             $ref: "ModelRef({./AccountType})"
+           accountName:
+             type: "string"
+             description: "Account name."

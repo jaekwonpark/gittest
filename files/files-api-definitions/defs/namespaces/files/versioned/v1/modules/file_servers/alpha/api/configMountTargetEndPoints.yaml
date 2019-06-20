@@ -1,0 +1,164 @@
+
+paths:
+  /{uuid}/mount_targets:
+    get:
+      tags:
+      - "ApiEndpoint(Files)"
+      description: "Returns a list of all mount targets "
+      operationId: "getAllMountTargets"
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+          required: true
+          description: "The uuid of the File Server"
+        - name: "$sort"
+          in: "query"
+          description: >
+            The sort criteria used to order the results.  Multiple values can be specified as a pipe-separated list.
+            Must map to a list of field names defined in the DTO.  Unknown fields are ignored.  Defaults to sort by
+            name if this query parameter is not specified.
+          schema:
+            type: "array"
+            items:
+              "type" : string
+        - name: "$page"
+          in: "query"
+          description: >
+            The start index of the records to return.  Defaults to 0
+          schema:
+            type: "integer"
+            format: "int64"
+        - name: "$limit"
+          in: "query"
+          description: >
+            The number of records to return.  Defaults to 100, max of 500
+          default: 100
+          minimum: 1
+          maximum: 500
+          required: false
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        200:
+          description: "Successfully returns all the Mount Targets"
+          content:
+            application/json:
+              schema:
+                $ref: "ApiResponse
+                ({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                   {/namespaces/files/versioned/v1/modules/file_servers/alpha/models/MountTarget}, true)"
+
+    post:
+      tags:
+      - "ApiEndpoint(Files)"
+      description: "Create mount targets"
+      operationId: "createMountTargets"
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+          required: true
+          description: "The uuid of the File Server"
+        - name: "requestBody"
+          in: "body"
+          description: >
+            The entity instance detail for creation.
+          schema:
+            $ref: "ModelRef({/namespaces/aiops/versioned/v1/modules/file_servers/alpha/models/MountTarget})"
+          responses:
+            201:
+              description: "Successfully create all mount_targets."
+              headers:
+                Location:
+                  type: "string"
+              content:
+                application/json:
+                  schema:
+                    $ref: "ApiResponse({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                         {/namespaces/aiops/versioned/v1/modules/file_servers/alpha/models/MountTarget}, false)"
+    put:
+      tags:
+      - "ApiEndpoint(Files)"
+      description: "Update mount targets"
+      operationId: "updateMountTargets"
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+          required: true
+          description: "The uuid of the File Server"
+        - name: "requestBody"
+          in: "body"
+          description: >
+            The entity instance detail for creation.
+          schema:
+            $ref: "ModelRef({/namespaces/aiops/versioned/v1/modules/file_servers/alpha/models/MountTarget})"
+          responses:
+            201:
+              description: "Successfully updated all mount_targets."
+              headers:
+                Location:
+                  type: "string"
+              content:
+                application/json:
+                  schema:
+                    $ref: "ApiResponse({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                         {/namespaces/aiops/versioned/v1/modules/file_servers/alpha/models/MountTarget}, false)"                                     
+
+  /{uuid}/mount_targets/{mount_target_uuid}:
+    get:
+      tags:
+      - "ApiEndpoint(Files)"
+      description: "Returns details for a single mount_target identified
+       by {id}"
+      operationId: "getMountTargetByUuid"
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+        required: true
+        description: "The uuid of the File Server"
+      - in: path
+        name: mount_target_uuid
+        schema:
+          type: string
+        required: true
+        description: "The uuid of the Mount Target"
+      responses:
+        200:
+          description: "Returned if the Mount details were successfully fetched
+          and returned"
+          content:
+            application/json:
+              schema:
+                $ref: "ApiResponse
+                ({/namespaces/common/versioned/v1/modules/response.templates/alpha/models/apiResponse},
+                                   {/namespaces/files/versioned/v1/modules/file_servers/alpha/models/MountTarget}, false)"
+
+    delete:
+      tags:
+      - "ApiEndpoint(Files)"
+      description: "Delete mount_target entity."
+      operationId: "deleteMountTarget"
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+          required: true
+          description: "The uuid of the File Server"
+        - in: path
+          name: mount_target_uuid
+          schema:
+            type: string
+          required: true
+          description: "The uuid of the Mount Target"
+      responses:
+        200:
+          description: "Successfully deleted the entities."                              
