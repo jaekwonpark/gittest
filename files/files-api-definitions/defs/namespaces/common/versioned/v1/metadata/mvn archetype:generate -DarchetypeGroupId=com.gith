@@ -1,0 +1,1 @@
+mvn archetype:generate -DarchetypeGroupId=com.github.krr -DarchetypeArtifactId=openapi-go-rest-server-archetype -DarchetypeVersion=0.1.0-SNAPSHOT -DgroupId=com.nutanix -DartifactId=files -DprojectDescription="This is the files REST Server" -DprojectName=Files -Dversion=1.0.0-SNAPSHOT -DinteractiveMode=false

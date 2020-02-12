@@ -1,0 +1,75 @@
+
+components:
+  schemas:
+    AbstractModel:
+      type: "object"
+      properties:
+        objectType:
+          type: "string"
+          description: "A fully qualified name of the object represented by this entity"
+          readOnly: true
+        tenantId:
+          type: "string"
+          description: >
+            The tenant to which this object instance belongs.  Every Nutanix object belongs to a tenant.
+            Once an object is created its tenancy cannot be changed.
+          readOnly: true
+
+    MetadataAbstractModel:
+      description: >
+        An abstract representation of an object that is itself not consumable via an external API endpoint
+        but provides metadata information in the form of HATEOAS links to the consumer.
+      allOf:
+      - $ref: "ModelRef({./AbstractModel})"
+      - type: "object"
+        properties:
+          links:
+            type: "array"
+            items:
+              $ref: "ModelRef({/namespaces/common/versioned/v1/modules/response.types/alpha/models/ApiLink})"
+            description: "The HATEOAS links for the Vm API.  Minimally contains the self link"
+    ExternalizableAbstractModel:
+      description: >
+        An abstract representation of an object that is externally consumable via an API endpoint.
+      allOf:
+      - $ref: "ModelRef({./MetadataAbstractModel})"
+      - type: "object"
+        properties:
+          extId:
+            type: "string"
+            description: "An identifier for the object that is suitable for external consumption."
+          name:
+            type: "string"
+            description: >
+              The tenant to which this object instance belongs.  Every Nutanix object belongs to a tenant.
+              Once an object is created its tenancy cannot be changed.
+          description:
+            type: "string"
+            description: >
+              The tenant to which this object instance belongs.  Every Nutanix object belongs to a tenant.
+              Once an object is created its tenancy cannot be changed.
+          displayName:
+            type: "string"
+            description: ""
+    CategoryAwareModel:
+      allOf:
+      - $ref: "ModelRef({./ExternalizableAbstractModel})"
+      - type: "object"
+        properties:
+          categories:
+            type: "array"
+            items:
+              $ref: "ModelRef({./Category})"
+            description: "An identifier for the object that is suitable for external consumption."
+    BaseEnum:
+      type: "string"
+      enum:
+      - "$UNKNOWN"
+    Category:
+      allOf:
+      - $ref: "ModelRef({./ExternalizableAbstractModel})"
+      - type: "object"
+        properties:
+          name:
+            type: "string"
+            description: "The name of this category"
