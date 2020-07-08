@@ -1,5 +1,4 @@
-new line 2020 0608
-new line 2020 0608 11:22
+new line
 new line
 new line
 new commit1
