@@ -1,0 +1,11 @@
+name: scheduled
+on:
+  schedule:
+    - cron: '* * * * *'
+jobs:
+  linux:
+    name: LCC Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo Hello World
+      run: echo "Hello World"
