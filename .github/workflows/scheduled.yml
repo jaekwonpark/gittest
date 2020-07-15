@@ -31,3 +31,13 @@ jobs:
         echo test, and deploy your project.
         echo test-oauth-${{ secrets.OAUTH_TOKEN }}
         echo test-goauth-${{ secrets.GITHUB_TOKEN }}
+    - name: Trigger project build in CircleCI.
+      uses: jaekwonpark/gh-action-circleci@v3
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      with:
+        task: project_build
+        repository: ${{ github.repository }}
+        circle-token: ${{ secrets.CIRCLE_TOKEN }}
+        branch: develop
+        github-token: ${{ secrets.GITHUB_OAUTH_TOKEN }}
