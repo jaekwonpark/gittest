@@ -31,7 +31,9 @@ jobs:
         ls -al .
         git branch --all
         git checkout merge_test
+        echo git rebase master
         git rebase master
+        echo git checkout master
         git checkout master
         git merge merge_test
         git push origin master
