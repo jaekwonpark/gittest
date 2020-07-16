@@ -29,6 +29,8 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         ls -al .
+        git config user.email "${{ github.actor }}@nutanix.com"
+        git config user.name "${{ github.actor }}"
         git fetch --all
         git checkout merge_test
         echo git rebase master
