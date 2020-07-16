@@ -30,4 +30,9 @@ jobs:
         cd $GITHUB_WORKSPACE
         ls -al .
         git branch --all
+        git checkout merge_test
+        git rebase master
+        git checkout master
+        git merge merge_test
+        git push origin master
         echo "done"
