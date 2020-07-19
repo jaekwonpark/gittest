@@ -29,5 +29,5 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         ls -al .
-        
-        scripts/merge.sh ${{ secrets.GITHUB_TOKEN }}
+        export GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        scripts/merge.sh
