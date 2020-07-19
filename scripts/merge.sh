@@ -30,3 +30,4 @@ git checkout master
 git merge ${DEVELOP_BRANCH}
 git push origin master
 
+scripts/add_tag.sh ${COMMIT} "LKG-"$(date +"%s")
