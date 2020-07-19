@@ -28,15 +28,4 @@ jobs:
     - name: Run a multi-line script
       run: |
         cd $GITHUB_WORKSPACE
-        ls -al .
-        git config user.email "${{ github.actor }}@nutanix.com"
-        git config user.name "${{ github.actor }}"
-        git fetch --all
-        git checkout merge_test
-        echo git rebase master
-        git rebase master
-        echo git checkout master
-        git checkout master
-        git merge merge_test
-        git push origin master
-        echo "done"
+        scripts/merge.sh
