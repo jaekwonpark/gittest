@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd $GITHUB_WORKSPACE
-git config user.email "${{ github.actor }}@nutanix.com"
-git config user.name "${{ github.actor }}"
+git config user.email "${GITHUB_ACTOR}@nutanix.com"
+git config user.name "${GITHUB_ACTOR}"
 git fetch --all
 
 git checkout ${DEVELOP_BRANCH}
