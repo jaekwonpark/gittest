@@ -25,7 +25,7 @@ fi
 
 git rebase master
 git checkout master
-git merge ${DEVELOP_BRANCH}
+git merge ${DEVELOP_BRANCH} ${COMMIT}
 git push origin master
 
 scripts/add_tag.sh ${COMMIT} "LKG-"$(date +"%s")
