@@ -30,4 +30,5 @@ jobs:
         cd $GITHUB_WORKSPACE
         ls -al .
         export GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        export SERVICE_NAME=${GITHUB_REPOSITORY}
         scripts/merge.sh
