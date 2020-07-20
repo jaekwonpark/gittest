@@ -32,4 +32,5 @@ jobs:
         export GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
         export SERVICE_NAME=${GITHUB_REPOSITORY}
         export DEVELOP_BRANCH='merge_test'
+        export GITHUB_ACTOR=${{ github.actor }}
         scripts/merge.sh
