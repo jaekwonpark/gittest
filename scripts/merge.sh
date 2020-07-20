@@ -1,7 +1,5 @@
 #!/bin/bash
 
-$DEVELOP_BRANCH='develop'
-
 cd $GITHUB_WORKSPACE
 git config user.email "${{ github.actor }}@nutanix.com"
 git config user.name "${{ github.actor }}"
