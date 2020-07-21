@@ -21,7 +21,7 @@ COMMIT=${line[1]}
 
 if [[ "x${COMMIT}" == "x" ]]; then
 	echo "No commit with tag prefix ${LCC_TAG_PREFIX} found"
-  exit 1
+  exit 0
 fi
 
 echo "Most Recent LCC TAG and Commit : ${LCC_TAG}, ${COMMIT}"
