@@ -14,7 +14,7 @@ git fetch --all
 git checkout ${DEVELOP_BRANCH}
 
 # find the most recent commit with LCC tag
-MOST_RECENT_TAGGED=$(git for-each-ref --sort='-*committerdate' --format='%(refname:short) %(objectname)' refs/tags/${LCC_TAG_PREFIX}*)
+MOST_RECENT_TAGGED=$(git for-each-ref --sort='-*committerdate' --format='%(refname:short) %(*objectname) %(objectname)' refs/tags/${LCC_TAG_PREFIX}*)
 line=($MOST_RECENT_TAGGED)
 LCC_TAG=${line[0]}
 COMMIT=${line[1]}
