@@ -19,7 +19,7 @@ line=($MOST_RECENT_TAGGED)
 LCC_TAG=${line[0]}
 COMMIT=${line[1]}
 
-if [[ "x${COMMIT}" != "x" ]]; then
+if [[ "x${COMMIT}" == "x" ]]; then
 	echo "No commit with tag prefix ${LCC_TAG_PREFIX} found"
   exit 1
 fi
