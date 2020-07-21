@@ -19,6 +19,11 @@ line=($MOST_RECENT_TAGGED)
 LCC_TAG=${line[0]}
 COMMIT=${line[1]}
 
+if [[ "x${COMMIT}" != "x" ]]; then
+	echo "No commit with tag prefix ${LCC_TAG_PREFIX} found"
+  exit 1
+fi
+
 echo "Most Recent LCC TAG and Commit : ${LCC_TAG}, ${COMMIT}"
 
 # check if already LKGed
