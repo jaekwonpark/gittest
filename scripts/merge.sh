@@ -1,7 +1,9 @@
 #!/bin/bash
 
+set -eo pipefail
+
 LKG_TAG_PREFIX="Release"
-LCC_TAG_PREFIX="LCC"
+LCC_TAG_PREFIX="RC"
 
 cd $GITHUB_WORKSPACE
 
@@ -12,7 +14,7 @@ git fetch --all
 git checkout ${DEVELOP_BRANCH}
 
 # find the most recent commit with LCC tag
-MOST_RECENT_TAGGED=$(git for-each-ref --sort='-*committerdate' --format='%(refname:short) %(*objectname)' refs/tags/${LCC_TAG_PREFIX}*)
+MOST_RECENT_TAGGED=$(git for-each-ref --sort='-*committerdate' --format='%(refname:short) %(objectname)' refs/tags/${LCC_TAG_PREFIX}*)
 line=($MOST_RECENT_TAGGED)
 LCC_TAG=${line[0]}
 COMMIT=${line[1]}
@@ -28,10 +30,8 @@ if [[ " ${ARRAY_ALL_TAGS[@]:0:7} " =~ "${LKG_TAG_PREFIX}" ]]; then
 fi
 
 # merge DEVELOP_BRANCH to master
-git rebase master
-git checkout master
-git merge ${DEVELOP_BRANCH} ${COMMIT}
-git push origin master
+scripts/merge_to_master.sh ${COMMIT}
 
 # add LKG tag to DEVELOP_BRANCH
-scripts/add_tag.sh ${COMMIT} "${LKG_TAG_PREFIX}${LCC_TAG:3}"
+TAG_STR="${LKG_TAG_PREFIX}${LCC_TAG:2}"
+scripts/add_tag.sh  ${COMMIT} ${TAG_STR}
