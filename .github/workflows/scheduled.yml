@@ -30,13 +30,13 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
         echo test-ghtoken-${{ secrets.GITHUB_TOKEN }}
-    - name: Trigger project build in CircleCI.
-      uses: jaekwonpark/gh-action-circleci@v3
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      with:
-        task: project_build
-        repository: ${{ github.repository }}
-        circle-token: ${{ secrets.CIRCLE_TOKEN }}
-        branch: develop
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Trigger project build in CircleCI.
+    #  uses: jaekwonpark/gh-action-circleci@v3
+    #  env:
+    #    GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    #  with:
+    #    task: project_build
+    #    repository: ${{ github.repository }}
+    #    circle-token: ${{ secrets.CIRCLE_TOKEN }}
+    #    branch: develop
+    #    github-token: ${{ secrets.GITHUB_TOKEN }}
