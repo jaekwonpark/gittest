@@ -2,7 +2,7 @@ name: Promote to LKG
 
 on:
   schedule:
-  - cron:  '*/5 * * * *'
+  - cron:  '*/1 * * * *'
 
 jobs:
   build:
@@ -15,6 +15,10 @@ jobs:
         fetch-depth: 0
         ref: master
 
+    - uses: nutanix-core/ntnx-api-release-engineering@v0
+      with:
+        github_oauth_token:${{ secrets.GIT_TOKEN }}
+         
     # merge LCC tagged commit from develop branch
     - name: Promote and merge
       run: |
