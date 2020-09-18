@@ -20,7 +20,7 @@ jobs:
         with:
           repository: nutanix-core/ntnx-api-release-engineering
           ref: v0
-          token: ${{ secrets.CANGIT_TOKEN }}
+          token: ${{ secrets.MY_TOKEN }}
           path: .github/actions/lkg
       - name: Run LKG Action
         uses: ./.github/actions/lkg
