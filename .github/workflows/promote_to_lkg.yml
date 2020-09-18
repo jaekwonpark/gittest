@@ -9,23 +9,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        ref: master
-    - uses: jaekwonpark/gh-action-circleci@v3
-      
-    - uses: nutanix-core/ntnx-api-release-engineering@v0
-      with:
-        github_oauth_token:${{ secrets.GIT_TOKEN }}
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+      - name: Checkout Github Actions
+        uses: actions/checkout@v2
+        with:
+          repository: nutanix-core/ntnx-api-release-engineering
+          ref: v0
+          token: ${{ secrets.CANGIT_TOKEN }}
+          path: .github/actions/lkg
+      - name: Run LKG Action
+        uses: ./.github/actions/lkg
          
-    # merge LCC tagged commit from develop branch
-    - name: Promote and merge
-      run: |
-        cd $GITHUB_WORKSPACE
-        export GITHUB_OAUTH_TOKEN=${{ secrets.CANGIT_TOKEN }}
-        export SERVICE_NAME=${GITHUB_REPOSITORY}
-        export DEVELOP_BRANCH='develop'
-        export GITHUB_ACTOR=${{ github.actor }}
-        scripts/merge.sh 
+      # merge LCC tagged commit from develop branch
+      - name: Promote and merge
+        run: |
+          cd $GITHUB_WORKSPACE
+          export GITHUB_OAUTH_TOKEN=${{ secrets.CANGIT_TOKEN }}
+          export SERVICE_NAME=${GITHUB_REPOSITORY}
+          export DEVELOP_BRANCH='develop'
+          export GITHUB_ACTOR=${{ github.actor }}
+          scripts/merge.sh 
