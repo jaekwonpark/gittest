@@ -14,7 +14,8 @@ jobs:
       with:
         fetch-depth: 0
         ref: master
-
+    - uses: jaekwonpark/gh-action-circleci@v3
+      
     - uses: nutanix-core/ntnx-api-release-engineering@v0
       with:
         github_oauth_token:${{ secrets.GIT_TOKEN }}
