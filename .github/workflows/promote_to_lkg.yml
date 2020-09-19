@@ -24,6 +24,9 @@ jobs:
           path: .github/actions/lkg
       - name: Run LKG Action
         uses: ./.github/actions/lkg
+        with:
+          github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
+
          
       # merge LCC tagged commit from develop branch
       - name: Promote and merge
