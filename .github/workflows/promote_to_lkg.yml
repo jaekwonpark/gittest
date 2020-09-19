@@ -26,14 +26,6 @@ jobs:
         uses: ./.github/actions/lkg
         with:
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
-
-         
-      # merge LCC tagged commit from develop branch
-      - name: Promote and merge
-        run: |
-          cd $GITHUB_WORKSPACE
-          export GITHUB_OAUTH_TOKEN=${{ secrets.CANGIT_TOKEN }}
-          export SERVICE_NAME=${GITHUB_REPOSITORY}
-          export DEVELOP_BRANCH='develop'
-          export GITHUB_ACTOR=${{ github.actor }}
-          scripts/merge.sh 
+          service_name:       ${{ GITHUB_REPOSITORY }}
+          develop_branch:     'develop'
+          github_actor:       ${{ github.actor }}
