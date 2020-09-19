@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Set environment variable for all steps
-      - name : Set Environment Variables
-        run: echo '::set-env name=LKG_ACTION_PATH::./.github/actions/lkg'
-
       # Check out your repository under $GITHUB_WORKSPACE in docker container
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -29,9 +25,11 @@ jobs:
           repository: nutanix-core/ntnx-api-release-engineering
           ref: v0
           token: ${{ secrets.MY_TOKEN }}
-          path: ${LKG_ACTION_PATH}
+          path: .github/actions/lkg
+
+      # Run LKG action. Note: 'uses' field can not have environment variable (github action does not allow variable in 'uses' field)
       - name: Run LKG Action
-        uses: ./$LKG_ACTION_PATH
+        uses: ./.github/actions/lkg
         with:
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
           github_repository:  ${GITHUB_REPOSITORY}
