@@ -26,6 +26,6 @@ jobs:
         uses: ./.github/actions/lkg
         with:
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
-          service_name:       ${{ GITHUB_REPOSITORY }}
+          service_name:       ${GITHUB_REPOSITORY}
           develop_branch:     'develop'
           github_actor:       ${{ github.actor }}
