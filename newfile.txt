@@ -92,11 +92,4 @@ new line
 new line
 new line
 onew file
-new
-new
-new
-new
-new
-new
-new
-new
+newline
