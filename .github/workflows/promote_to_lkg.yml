@@ -9,12 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
+      # Check out your repository under $GITHUB_WORKSPACE in docker container
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: master
+
+      # Check out Github Action to merge and promote to LKG under $GITHUB_WORKSPACE/$LKG_ACTION_PATH
+      # This is because github actions can not be pulled directly from private repository,
+      # even though it is under same org
       - name: Checkout Github Actions
         uses: actions/checkout@v2
         with:
@@ -22,6 +26,8 @@ jobs:
           ref: v0
           token: ${{ secrets.MY_TOKEN }}
           path: .github/actions/lkg
+
+      # Run LKG action. Note: 'uses' field can not have environment variable (github action does not allow variable in 'uses' field)
       - name: Run LKG Action
         uses: ./.github/actions/lkg
         with:
