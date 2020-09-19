@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.MY_TOKEN }}
           path: ${LKG_ACTION_PATH}
       - name: Run LKG Action
-        uses: ./${LKG_ACTION_PATH}
+        uses: ./"${LKG_ACTION_PATH}"
         with:
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
           github_repository:  ${GITHUB_REPOSITORY}
