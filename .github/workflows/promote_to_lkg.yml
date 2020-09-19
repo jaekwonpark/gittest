@@ -9,21 +9,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
+      # Set environment variable for all steps
+      - name : Set Environment Variables
+        run: echo '::set-env name=LKG_ACTION_PATH::./.github/actions/lkg'
+
+      # Check out your repository under $GITHUB_WORKSPACE in docker container
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           ref: master
+
+      # Check out Github Action to merge and promote to LKG under $GITHUB_WORKSPACE/$LKG_ACTION_PATH
       - name: Checkout Github Actions
+        description: Checkout Github Actions. This is because github actions can not be pulled directly from private repository, even though it is under same org
         uses: actions/checkout@v2
         with:
           repository: nutanix-core/ntnx-api-release-engineering
           ref: v0
-          token: ${{ secrets.MY_TOKEN }}
-          path: .github/actions/lkg
+          token: ${{ secrets.CANGIT_TOKEN }}
+          path: ${LKG_ACTION_PATH}
       - name: Run LKG Action
-        uses: ./.github/actions/lkg
+        uses: ${LKG_ACTION_PATH}
         with:
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
           github_repository:  ${GITHUB_REPOSITORY}
