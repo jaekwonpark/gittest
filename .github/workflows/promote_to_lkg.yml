@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
           ref: master
 
-      # Check out Github Action to merge and promote to LKG under $GITHUB_WORKSPACE/$LKG_ACTION_PATH
+      # Check out Github Action to merge and promote to LKG under $GITHUB_WORKSPACE/.github/actions/lkg
       # This is because github actions can not be pulled directly from private repository,
       # even though it is under same org
       - name: Checkout Github Actions
@@ -27,10 +27,14 @@ jobs:
           token: ${{ secrets.MY_TOKEN }}
           path: .github/actions/lkg
 
-      # Run LKG action. Note: 'uses' field can not have environment variable (github action does not allow variable in 'uses' field)
+      # Run LKG action. 
+      # Note: 'uses' field can not have environment variable (github action does not allow variable in 'uses' field)
       - name: Run LKG Action
         uses: ./.github/actions/lkg
         with:
+          # needed for github API call 
           github_oauth_token: ${{ secrets.CANGIT_TOKEN }}
+          # branch to check out
           develop_branch:     'develop'
+          # needed for git checkout
           github_actor:       ${{ github.actor }}
