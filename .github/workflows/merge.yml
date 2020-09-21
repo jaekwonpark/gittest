@@ -25,11 +25,11 @@ jobs:
         ref: master
 
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        cd $GITHUB_WORKSPACE
-        export GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-        export SERVICE_NAME=${GITHUB_REPOSITORY}
-        export DEVELOP_BRANCH='merge_test'
-        export GITHUB_ACTOR=${{ github.actor }}
-        scripts/merge.sh
+    #- name: Run a multi-line script
+    #  run: |
+    #    cd $GITHUB_WORKSPACE
+    #    export GITHUB_OAUTH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+    #    export SERVICE_NAME=${GITHUB_REPOSITORY}
+    #    export DEVELOP_BRANCH='merge_test'
+    #    export GITHUB_ACTOR=${{ github.actor }}
+    #    scripts/merge.sh
