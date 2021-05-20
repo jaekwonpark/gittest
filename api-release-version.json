@@ -1,0 +1,49 @@
+{
+	"artifacts": [
+		{
+			"groupId": "com.nutanix.nutanix-core.ntnx-api.catalog",
+			"artifactId": "catalog-api-definitions",
+			"namespace": "vmm",
+			"versions": [
+				{
+					"releaseVersion": "16.1.0.450",
+					"apiVersion": "v4.r0.a1"
+				}
+			]
+		},
+		{
+			"groupId": "com.nutanix.nutanix-core.ntnx-api.storage",
+			"artifactId": "storage-api-definitions",
+			"namespace": "storage",
+			"versions": [
+				{
+					"releaseVersion": "16.1.0.1557",
+					"apiVersion": "v4.r0.a1"
+				}
+			]
+		},
+		{
+			"groupId": "com.nutanix.nutanix-core.ntnx-api.flow",
+			"artifactId": "microseg-api-definitions",
+			"namespace": "microseg",
+			"versions": [
+				{
+					"releaseVersion": "11.0.233",
+					"apiVersion": "v4.r0.a1"
+				}
+			]
+		},
+		{
+			"groupId": "com.nutanix.nutanix-core.ntnx-api.data-protection",
+			"artifactId": "data-protection-api-definitions",
+			"namespace": "dataprotection",
+			"versions": [
+				{
+					"releaseVersion": "16.1.0.387",
+					"apiVersion": "v4.r0.a1"
+				}
+			]
+		}
+	]
+}
+string1
